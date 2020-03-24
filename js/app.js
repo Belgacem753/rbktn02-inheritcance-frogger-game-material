@@ -2,7 +2,9 @@
 var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-
+    this.x = Math.floor(Math.random()*400);
+    this.y = Math.floor(Math.random()*400);
+    this.speed = 50;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -14,12 +16,55 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    
 };
+
+
+   /*********************************************
+   Inside the app.js file, you will need to implement the Player and the Enemy classes, using Object-Oriented JavaScript. 
+   Part of the code for the Enemy is provided to you, and you will need to complete the following:
+   *	The Enemy function, which initiates the Enemy by:
+   *	Loading the image by setting this.sprite to the appropriate image in the image folder (already provided)
+   *	Setting the Enemy initial location (you need to implement)
+   *	Setting the Enemy speed (you need to implement)
+   *	The update method for the Enemy
+   *	Updates the Enemy location (you need to implement)
+   *	EXTRA: RANDOMIZES ENEMY RE-START SPEED
+   *	              //TODO: MAKE ENEMIES DO NOT COINCEDE IN ROW 
+   *	Handles collision with the Player (you need to implement)	
+   *	You can add your own Enemy methods as needed *******************************************************/
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+var x = new Enemy();
+
+var allEnemies = [];
+allEnemies.push(new Enemy());
+allEnemies.push(new Enemy());
+allEnemies.push(new Enemy())
+
+var Player = function() {
+   
+    this.x =50;
+    this.y = 200;
+    this.speed = 50;
+    this.sprite = 'images/char-boy.png';
+};
+
+
+Player.prototype.update = function(dt) {
+  
+};
+Player.prototype.render = function() {
+   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+
+var player = new Player()
+
 
 // Now write your own player class
 // This class requires an update(), render() and

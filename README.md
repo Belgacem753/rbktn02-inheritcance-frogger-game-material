@@ -24,7 +24,7 @@ Once the player reaches the water the game is won.
    *	index.html - opening index.html should load the game
    *	README.md should contain instructions on how to load and play the game (you will need to add those instructions).
    
-   Inside the app.js file, you will need to implement the Player and the Enemy classes, using Object-Oriented JavaScript. Part of the code for the Enemy is provided to you, and you will need to complete the following:
+   /*Inside the app.js file, you will need to implement the Player and the Enemy classes, using Object-Oriented JavaScript. Part of the code for the Enemy is provided to you, and you will need to complete the following:
    *	The Enemy function, which initiates the Enemy by:
    *	Loading the image by setting this.sprite to the appropriate image in the image folder (already provided)
    *	Setting the Enemy initial location (you need to implement)
@@ -34,7 +34,7 @@ Once the player reaches the water the game is won.
    *	EXTRA: RANDOMIZES ENEMY RE-START SPEED
    *	              //TODO: MAKE ENEMIES DO NOT COINCEDE IN ROW 
    *	Handles collision with the Player (you need to implement)	
-   *	You can add your own Enemy methods as needed
+   *	You can add your own Enemy methods as needed */
    
    You will also need to implement the Player class, and you can use the Enemy class as an example on how to get started. At minimum you should implement the following:
    *	The Player function, which initiates the Player by:
