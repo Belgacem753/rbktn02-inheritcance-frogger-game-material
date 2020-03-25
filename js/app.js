@@ -1,10 +1,13 @@
 // Enemies our player must avoid
+
+var X = [0, 101, 202, 303, 404];
+var Y = [390, 310, 230, 150, 70]
 var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-    this.x = Math.floor(Math.random()*400);
-    this.y = Math.floor(Math.random()*400);
-    this.speed = 50;
+    this.x = -80;
+    this.y = Y[Math.floor(Math.random()*5)];
+    this.speed = 1;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -16,7 +19,13 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    
+    this.x += this.speed;
+    if(this.x === player.x && this.y === player.y){
+        // alert("You lose");
+        this.speed = 1;
+        player = new Player();
+        allEnemies = [];
+    }
 };
 
 
@@ -42,15 +51,17 @@ Enemy.prototype.render = function() {
 var x = new Enemy();
 
 var allEnemies = [];
-allEnemies.push(new Enemy());
-allEnemies.push(new Enemy());
-allEnemies.push(new Enemy())
+
+
+setInterval(function(){
+    allEnemies.push(new Enemy());
+}, 2000);
 
 var Player = function() {
    
-    this.x =50;
-    this.y = 200;
-    this.speed = 50;
+    this.x = 101;
+    this.y = 390;
+    this.speed = 101;
     this.sprite = 'images/char-boy.png';
 };
 
@@ -62,7 +73,23 @@ Player.prototype.render = function() {
    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-
+Player.prototype.handleInput = function (e){
+     if(e === "up" && this.y > 0){
+        this.y -= this.speed -21;
+     } else if(e === "down" && this.y < 390){
+        this.y += this.speed-21;
+     } else if(e === "right" && this.x < 404){
+        this.x += this.speed;
+     } else if(e === "left" && this.x > 0){
+        this.x -= this.speed;
+     }
+     if(this.y === -10){
+         alert("you win")
+         Enemy.prototype.speed = Enemy.prototype.speed + 1;
+         allEnemies = [];
+         player = new Player();
+     }
+};
 var player = new Player()
 
 
