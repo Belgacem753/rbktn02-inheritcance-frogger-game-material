@@ -1,13 +1,17 @@
 // Enemies our player must avoid
+var level = 1;
+var losing = false;
+
 
 var X = [0, 101, 202, 303, 404];
 var Y = [390, 310, 230, 150, 70]
 var Enemy = function() {
+
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = -80;
     this.y = Y[Math.floor(Math.random()*5)];
-    this.speed = 1;
+    this.speed = level;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -19,15 +23,25 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    // :'(
+    var maxWidth = ctx.canvas.width;
+    var maxHeight = ctx.canvas.height;
     this.x += this.speed;
-    if(this.x === player.x && this.y === player.y){
-        // alert("You lose");
-        this.speed = 1;
-        player = new Player();
-        allEnemies = [];
+    if(this.x >= player.x -50.5 && this.x <= player.x + 50.5 && this.y === player.y){
+        if(!losing){   
+            setTimeout(function(){    
+                //alert("You lose");
+                level = 1;
+                player = new Player();
+                allEnemies = [];
+                losing = false;
+            }, 1000)  
+            losing = true;
+        }
     }
 };
 
+//-50.5  202 +50.5
 
    /*********************************************
    Inside the app.js file, you will need to implement the Player and the Enemy classes, using Object-Oriented JavaScript. 
@@ -54,8 +68,10 @@ var allEnemies = [];
 
 
 setInterval(function(){
-    allEnemies.push(new Enemy());
-}, 2000);
+    for(var i = 1; i<= level; i+= 1){
+        allEnemies.push(new Enemy());
+    }
+}, 4000);
 
 var Player = function() {
    
@@ -73,6 +89,7 @@ Player.prototype.render = function() {
    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+
 Player.prototype.handleInput = function (e){
      if(e === "up" && this.y > 0){
         this.y -= this.speed -21;
@@ -84,10 +101,12 @@ Player.prototype.handleInput = function (e){
         this.x -= this.speed;
      }
      if(this.y === -10){
-         alert("you win")
-         Enemy.prototype.speed = Enemy.prototype.speed + 1;
-         allEnemies = [];
-         player = new Player();
+         setTimeout(function(){
+            alert("you win")
+            level += 1;
+            allEnemies = [];
+            player = new Player();
+         }, 1000);
      }
 };
 var player = new Player()
